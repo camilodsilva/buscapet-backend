@@ -89,6 +89,8 @@ class ShelterController {
       return res.status(400).json({ error: 'Shelter not found' });
     }
 
+    await shelter.destroy();
+
     return res.json(shelter);
   }
 }
