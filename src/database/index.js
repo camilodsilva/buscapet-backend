@@ -5,8 +5,9 @@ import databaseConfig from '../config/database';
 import User from '../app/models/User';
 import Shelter from '../app/models/Shelter';
 import Pet from '../app/models/Pet';
+import Intent from '../app/models/Intent';
 
-const models = [User, Shelter, Pet];
+const models = [User, Shelter, Pet, Intent];
 
 class Database {
   constructor() {
