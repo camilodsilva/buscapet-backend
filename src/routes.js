@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import multer from 'multer';
+import multerConfig from './config/multer';
 
 import SessionController from './app/controllers/SessionController';
 import UserController from './app/controllers/UserController';
@@ -13,6 +15,7 @@ import PetValidation from './app/middlewares/PetValidation';
 import Auth from './app/middlewares/Auth';
 
 const routes = new Router();
+const upload = multer(multerConfig);
 
 routes.post('/users', UserValidation.store, UserController.store);
 routes.post('/sessions', SessionController.store);
@@ -38,5 +41,10 @@ routes.delete('/pets/:id', PetController.delete);
 routes.get('/intents', IntentController.index);
 routes.post('/intents', IntentController.store);
 routes.delete('/intents/:id', IntentController.delete);
+
+// files uploads routes
+routes.post('/files', upload.single('file'), (req, res) => {
+  return res.json(req.file);
+});
 
 export default routes;
