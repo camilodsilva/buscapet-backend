@@ -1,6 +1,7 @@
 import Pet from '../models/Pet';
 import Shelter from '../models/Shelter';
 import User from '../models/User';
+import File from '../models/File';
 
 /**
  * todo:
@@ -31,6 +32,11 @@ class PetController {
             },
           ],
         },
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
       ],
     });
 
@@ -53,7 +59,7 @@ class PetController {
 
   async update(req, res) {
     const { id } = req.params;
-    const { name, age, family, breed, shelter_id } = req.body;
+    const { name, age, family, breed, shelter_id, avatar_id } = req.body;
 
     const pet = await Pet.findByPk(id);
 
@@ -73,6 +79,7 @@ class PetController {
       family,
       breed,
       shelter_id,
+      avatar_id,
     });
 
     return res.json(petUpdate);
