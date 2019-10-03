@@ -6,8 +6,9 @@ import User from '../app/models/User';
 import Shelter from '../app/models/Shelter';
 import Pet from '../app/models/Pet';
 import Intent from '../app/models/Intent';
+import File from '../app/models/File';
 
-const models = [User, Shelter, Pet, Intent];
+const models = [User, Shelter, Pet, Intent, File];
 
 class Database {
   constructor() {

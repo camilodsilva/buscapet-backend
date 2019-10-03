@@ -7,6 +7,7 @@ import UserController from './app/controllers/UserController';
 import ShelterController from './app/controllers/ShelterController';
 import PetController from './app/controllers/PetController';
 import IntentController from './app/controllers/IntentController';
+import FileController from './app/controllers/FileController';
 
 import UserValidation from './app/middlewares/UserValidation';
 import ShelterValidation from './app/middlewares/ShelterValidation';
@@ -43,8 +44,6 @@ routes.post('/intents', IntentController.store);
 routes.delete('/intents/:id', IntentController.delete);
 
 // files uploads routes
-routes.post('/files', upload.single('file'), (req, res) => {
-  return res.json(req.file);
-});
+routes.post('/files', upload.single('file'), FileController.store);
 
 export default routes;
