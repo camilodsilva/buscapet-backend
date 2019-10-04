@@ -1,28 +1,41 @@
 import User from '../models/User';
+import Mail from '../../lib/Mail';
 
 class UserController {
   async store(req, res) {
-    const { email } = req.body;
+    const { email, name } = req.body;
 
-    const user = await User.findOne({
-      where: {
+    // const user = await User.findOne({
+    //   where: {
+    //     email,
+    //   },
+    // });
+
+    // if (user) {
+    //   return res
+    //     .status(401)
+    //     .json({ error: 'Can not register the same email twice' });
+    // }
+
+    // const { id, name } = await User.create(req.body);
+
+    await Mail.sendMail({
+      to: `${name} <${email}>`,
+      subject: 'Confirmação de Cadastro',
+      template: 'confirm',
+      context: {
+        name,
         email,
       },
     });
 
-    if (user) {
-      return res
-        .status(401)
-        .json({ error: 'Can not register the same email twice' });
-    }
+    return res.json({ message: 'success' });
 
-    const { id, name } = await User.create(req.body);
-
-    return res.json({
-      id,
-      name,
-      email,
-    });
+    // return res.json({
+    //   id,
+    //   name,
+    //   email,
+    // });
   }
 
   async update(req, res) {
